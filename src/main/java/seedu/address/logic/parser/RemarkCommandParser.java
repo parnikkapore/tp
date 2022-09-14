@@ -11,7 +11,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 public class RemarkCommandParser {
-
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -30,5 +29,4 @@ public class RemarkCommandParser {
 
         return new RemarkCommand(index, remark);
     }
-
 }
