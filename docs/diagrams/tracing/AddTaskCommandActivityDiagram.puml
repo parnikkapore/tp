@@ -1,0 +1,16 @@
+@startuml
+start
+
+:User executes "add" command;
+
+switch ()
+case ( [invalid arguments] )
+    :Display error message;
+case ( [Equivalent task already exists] )
+    :Display error message;
+case  ( [else] )
+    :Add the new task to the TaskList;
+endswitch
+
+stop
+@enduml

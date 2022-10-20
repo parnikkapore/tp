@@ -196,13 +196,13 @@ Consider the following situation:
 
 As a user in this situation, the last thing you would want is for the app to _exclude_ contacts taking both MOD_X and MOD_Y. Those would be the first people you want to ask for help!
 
-### Adding tasks
+### \[Proposed\] Task adding feature extension
 
 #### About
 
 CodeConnect has features that allow you to add and track your tasks and annotate them with modules, so that you can search for matching people. The `add` command, implemented in [`AddTaskCommand`](https://github.com/AY2223S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/commands/AddTaskCommand.java) and [`AddTaskCommandParser`](https://github.com/AY2223S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/parser/AddTaskCommandParser.java), is how you add new tasks.
 
-The following describes the implementation planned for v1.3.
+The following describes the implementation planned for v1.3, which adds natural date parsing.
 
 Examples of command use:
 - `add Lab2 by/2022-02-02 23:59 m/CS2030S`
@@ -211,6 +211,9 @@ Examples of command use:
 #### Implementation flow
 
 The `add` command follows the [general command implementation flow](#logic-component). The `AddTaskCommandParser` uses `NaturalDateParser`, a thin wrapper over [`JChronic`](https://github.com/samtingleff/jchronic0), to parse the given deadline.
+
+![Activity diagram for execution of an add command](images/AddTaskCommandActivityDiagram.png)
+<div style="text-align: center">Activity diagram of add command execution</div>
 
 ![Interactions Inside the Logic Component for the `add Add error handling by/next thursday m/CS2103T` Command](images/AddTaskCommandSequenceDiagram.png)
 <div style="text-align: center">Sequence diagram of add command execution</div>
@@ -222,6 +225,7 @@ The `add` command follows the [general command implementation flow](#logic-compo
 * The natural parser we are using does not support parsing time. We decided that this is an acceptable tradeoff as the benefit of being able to enter the date in the format most intuitive to the user outweighs the small and rarely used benefit of being able to track the time of the deadline.
 * The `add` command shares the `m/` prefix for modules with the other commands.
   * The `by/` prefix is chosen for the deadline, as it is a good compromise between brevity and comprehensibility ("do this *by* a certain date").
+* Tasks with the same name and module as a preexisting task will be considered an unintentional duplicate and will not be added. We decided to use this criteria as recurring assignments we've seen in SoC so far have a unique postfix (e.g. Lab 1, Lab 2)
 
 ### \[Proposed\] Undo/redo feature
 
