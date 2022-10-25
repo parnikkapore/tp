@@ -18,6 +18,9 @@ import com.mdimension.jchronic.utils.Span;
  * A simple JChronic-based date + time parser.
  */
 public class NaturalDateParser {
+    public static final String MESSAGE_CONSTRAINTS =
+            "The deadline was not understood. Perhaps enter it like \"2 Jan 2022 15:04\" or \"tomorrow 2pm\"?";
+
     /**
      * Parses the given string, assumed to be in the local time zone, into a LocalDateTime.
      *

@@ -15,7 +15,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "The deadline was not understood. Perhaps enter it like \"2 Jan 2022 15:04\" or \"tomorrow 2pm\"?";
+            "A saved deadline cannot be read. It should be formatted like \"2022-11-22 12:34\".";
 
     //@@author parnikkapore-reused
     // Date format taken from https://github.com/angkl0/ip/blob/master/src/main/java/duke/tasks/Deadline.java#L39
@@ -69,13 +69,29 @@ public class Deadline {
         return true;
     }
 
+    /**
+     * Returns a String representation of the Deadline that can be fed into Deadline.fromDeadlineString().
+     *
+     * @return the String representation.
+     */
+    public String deadlineString() {
+        return deadline.format(CONSTRUCT_FORMATTER);
+    }
+
+    /**
+     * Constructs a Deadline from a String created by Deadline::deadlineString(). This is a more standard equivalent to
+     * Deadline(String).
+     *
+     * @param deadlineString The string to construct the Deadline from.
+     * @return The created Deadline.
+     */
+    public static Deadline fromDeadlineString(String deadlineString) {
+        return new Deadline(deadlineString);
+    }
+
     @Override
     public String toString() {
         return deadline.format(WRITE_FORMATTER);
-    }
-
-    public String deadlineString() {
-        return deadline.format(CONSTRUCT_FORMATTER);
     }
 
     @Override

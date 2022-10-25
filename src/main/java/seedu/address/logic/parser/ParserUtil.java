@@ -186,7 +186,7 @@ public class ParserUtil {
         try {
             parsedDeadline = NaturalDateParser.parse(trimmedDeadline);
         } catch (NaturalDateParser.DateTimeNotFoundException e) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+            throw new ParseException(NaturalDateParser.MESSAGE_CONSTRAINTS);
         }
 
         return new Deadline(parsedDeadline);

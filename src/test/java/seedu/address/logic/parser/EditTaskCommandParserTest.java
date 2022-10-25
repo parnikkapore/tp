@@ -24,10 +24,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.NaturalDateParser;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.model.module.Module;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -67,16 +67,20 @@ public class EditTaskCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_TASK_NAME_PREF, TaskName.MESSAGE_CONSTRAINTS); // invalid taskname
-        assertParseFailure(parser, "1" + INVALID_MODULE_DESC, Module.MESSAGE_CONSTRAINTS); // invalid module
-        assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, Deadline.MESSAGE_CONSTRAINTS); // invalid deadline
+        // invalid taskname
+        assertParseFailure(parser, "1" + INVALID_TASK_NAME_PREF, TaskName.MESSAGE_CONSTRAINTS);
+        // invalid module
+        assertParseFailure(parser, "1" + INVALID_MODULE_DESC, Module.MESSAGE_CONSTRAINTS);
+        // invalid deadline
+        assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, NaturalDateParser.MESSAGE_CONSTRAINTS);
+
         // invalid module followed by valid deadline
         assertParseFailure(parser, "1" + INVALID_MODULE_DESC + DEADLINE_DESC_FINISH_TP,
                 Module.MESSAGE_CONSTRAINTS);
 
         //valid module followed by invalid deadline
         assertParseFailure(parser, "1" + MODULE_DESC_FINISH_TP + INVALID_DEADLINE_DESC,
-                Deadline.MESSAGE_CONSTRAINTS);
+                NaturalDateParser.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_TASK_NAME_PREF + INVALID_MODULE_DESC + INVALID_DEADLINE_DESC,

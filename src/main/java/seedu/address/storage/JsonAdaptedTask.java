@@ -1,9 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,7 +16,6 @@ import seedu.address.model.task.TaskName;
 public class JsonAdaptedTask {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
-    private static final DateTimeFormatter DEADLINE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
     public final String taskName;
@@ -46,7 +41,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         taskName = source.getName().fullName;
         module = source.getModule().moduleName;
-        deadline = source.getDeadline().deadline.format(DEADLINE_FORMATTER);
+        deadline = source.getDeadline().deadlineString();
         status = source.getStatus().toString();
     }
 
@@ -78,13 +73,10 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
         }
-        LocalDateTime parsedDeadline;
-        try {
-            parsedDeadline = LocalDateTime.parse(deadline, DEADLINE_FORMATTER);
-        } catch (DateTimeParseException e) {
+        if (!Deadline.isValidDeadline(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
         }
-        Deadline modelDeadline = new Deadline(parsedDeadline);
+        final Deadline modelDeadline = Deadline.fromDeadlineString(deadline);
 
         if (status == null) {
             throw new IllegalValueException(
