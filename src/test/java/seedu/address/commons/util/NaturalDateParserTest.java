@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.util.NaturalDateParser.parse;
+import static seedu.address.testutil.Assert.assertBetween;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -26,14 +27,16 @@ class NaturalDateParserTest {
     /** Inputs that are not a point - implementations should satisfy these behavior */
     @Test
     void parse_nonPointInputs() {
-        // Use the end of the day/week
-        assertEquals(
-                LocalDateTime.of(2006, 1, 2, 23, 59, 59),
-                parse("2 Jan 2006")
+        // Within the day/week
+        assertBetween(
+                LocalDateTime.of(2006, 1, 2, 0, 0, 0),
+                parse("2 Jan 2006"),
+                LocalDateTime.of(2006, 1, 2, 23, 59, 59)
         );
-        assertEquals(
-                LocalDateTime.of(2006, 2, 28, 23, 59, 59),
-                parse("Feb 2006")
+        assertBetween(
+                LocalDateTime.of(2006, 2, 1, 0, 0, 0),
+                parse("Feb 2006"),
+                LocalDateTime.of(2006, 2, 28, 23, 59, 59)
         );
     }
 

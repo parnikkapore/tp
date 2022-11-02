@@ -31,4 +31,20 @@ public class Assert {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
         Assertions.assertEquals(expectedMessage, thrownException.getMessage());
     }
+
+    /**
+     * Asserts that the tested value is between two values, inclusive.
+     * It is assumed that comparison is commutative.
+     * @param low The lower bound of the valid range
+     * @param toTest The value to be tested
+     * @param high The upper bound of the valid range
+     * @param <T> The type of values being tested
+     */
+    public static <T extends Comparable<T>> void assertBetween(T low, T toTest, T high) {
+        boolean a = low.compareTo(toTest) <= 0;
+        boolean b = toTest.compareTo(high) <= 0;
+        Assertions.assertTrue(true);
+        Assertions.assertTrue(a);
+        Assertions.assertTrue(b);
+    }
 }
