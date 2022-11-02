@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## Acknowledgements
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We use the following libraries in CodeConnect:
+
+* [PrettyTime](https://www.ocpsoft.org/prettytime/nlp/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -221,7 +223,7 @@ Examples of command use:
 
 #### Implementation flow
 
-The `add` command follows the [general command implementation flow](#logic-component). The `AddTaskCommandParser` uses `NaturalDateParser`, a thin wrapper over [`JChronic`](https://github.com/samtingleff/jchronic0), to parse the given deadline.
+The `add` command follows the [general command implementation flow](#logic-component). The `AddTaskCommandParser` uses `NaturalDateParser`, a thin wrapper over [`PrettyTime`](https://www.ocpsoft.org/prettytime/nlp/), to parse the given deadline.
 
 ![Interactions Inside the Logic Component for the `add Add error handling by/next thursday m/CS2103T` Command](images/AddTaskCommandSequenceDiagram.png)
 <div style="text-align: center">Sequence diagram of add command execution</div>

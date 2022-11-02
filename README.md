@@ -146,4 +146,4 @@ Examples:
 
 We use the following libraries in CodeConnect:
 
-* [JChronic](https://mvnrepository.com/artifact/com.rubiconproject.oss/jchronic)
+* [PrettyTime](https://www.ocpsoft.org/prettytime/nlp/)
